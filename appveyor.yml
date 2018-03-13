@@ -1,0 +1,44 @@
+version: Build-{build}
+skip_commits:
+  files:
+    - docs/*
+    - appveyor.yml
+    - readme.md
+branches:
+  only:
+  - develop
+  - master
+environment:
+  packageVersion: NotSet
+  packageName: Autofac.BindingByConvention
+  assemblyInfoPath: C:\projects\autofac-bindingbyconvention\src\Autofac.BindingByConvention\Properties\AssemblyInfo.cs
+  repoNuGet: https://www.nuget.org/api/v2
+install:
+- git submodule update --init --recursive
+before_build:
+- nuget restore -verbosity detailed -source "https://www.nuget.org/api/v2" "./src/Autofac.BindingByConvention.sln"
+- ps: .\AssemblyInfoVersion\src\SetNextVersion.ps1 $env:assemblyInfoPath $env:packageName $env:APPVEYOR_REPO_BRANCH $env:repoNuGet
+build:
+  verbosity: minimal
+after_build:
+- cmd: nuget pack %APPVEYOR_BUILD_FOLDER%\src\Autofac.BindingByConvention\Autofac.BindingByConvention.csproj
+- cmd: nuget pack %APPVEYOR_BUILD_FOLDER%\src\Autofac.BindingByConvention\Autofac.BindingByConvention.csproj -symbols
+artifacts:
+- path: '**/Autofac.BindingByConvention.*.nupkg'
+  name: NuGet_pkg
+deploy:
+- provider: NuGet
+  server: https://www.nuget.org/api/v2/package
+  artifact: NuGet_pkg
+  api_key:
+    secure: xxxxxxxxxxxxxxxxxx
+  on:
+    branch: develop
+- provider: NuGet
+  server: https://www.nuget.org/api/v2/package
+  artifact: NuGet_pkg
+  api_key:
+    secure: 4wZX/xxxxxxxxxxxxxxxxxx
+  on:
+    branch: master
+  
