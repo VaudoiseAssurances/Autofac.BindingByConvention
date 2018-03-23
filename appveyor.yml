@@ -11,13 +11,13 @@ branches:
 environment:
   packageVersion: NotSet
   packageName: Autofac.BindingByConvention
-  assemblyInfoPath: C:\projects\autofac-bindingbyconvention\src\Autofac.BindingByConvention\Properties\AssemblyInfo.cs
+  csprojPath: C:\projects\autofac-bindingbyconvention\src\Autofac.BindingByConvention\Autofac.BindingByConvention.csproj
   repoNuGet: https://www.nuget.org/api/v2
 install:
 - git submodule update --init --recursive
 before_build:
 - nuget restore -verbosity detailed -source "https://www.nuget.org/api/v2" "./src/Autofac.BindingByConvention.sln"
-- ps: C:\projects\autofac-bindingbyconvention\src\AssemblyInfoVersion\src\SetNextVersion.ps1 $env:assemblyInfoPath $env:packageName $env:APPVEYOR_REPO_BRANCH $env:repoNuGet
+- ps: %APPVEYOR_BUILD_FOLDER%\dotnet-versioning-scripts\.NET Versioning\define-version-variables-appveyor.ps1 $env:csprojPath $env:packageName $env:APPVEYOR_REPO_BRANCH
 build:
   verbosity: minimal
 after_build:
