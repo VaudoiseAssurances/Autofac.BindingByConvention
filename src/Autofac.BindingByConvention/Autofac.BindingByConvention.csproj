@@ -2,6 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.0.1</Version>
+    <Authors>Vaudoise Assurances</Authors>
+    <Company>Vaudoise Assurances</Company>
+    <Product>Autofac.BindingByConvention</Product>
+    <Description>Manually registering types in an IoC container can be a tedious task. This extension to Autofac aims to help automatically registering types with common, built-in and extensible conventions.</Description>
+    <Copyright>Vaudoise Assurances</Copyright>
+    <PackageProjectUrl>https://github.com/VaudoiseAssurances/Autofac.BindingByConvention</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/VaudoiseAssurances/Autofac.BindingByConvention.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Autofac, Binding, Convention</PackageTags>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
