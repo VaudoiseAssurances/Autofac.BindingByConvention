@@ -9,6 +9,7 @@ branches:
   - develop
   - master
 environment:
+  versioningScriptsFolder: $env:APPVEYOR_BUILD_FOLDER\dotnet-versioning-scripts\.NET Versioning
   packageVersion: NotSet
   packageName: Autofac.BindingByConvention
   csprojPath: C:\projects\autofac-bindingbyconvention\src\Autofac.BindingByConvention\Autofac.BindingByConvention.csproj
@@ -17,7 +18,7 @@ install:
 - git submodule update --init --recursive
 before_build:
 - nuget restore -verbosity detailed -source "https://www.nuget.org/api/v2" "./src/Autofac.BindingByConvention.sln"
-- ps: %APPVEYOR_BUILD_FOLDER%\dotnet-versioning-scripts\.NET Versioning\define-version-variables-appveyor.ps1 $env:csprojPath $env:packageName $env:APPVEYOR_REPO_BRANCH
+- ps: $env:versioningScriptsFolder\define-version-variables-appveyor.ps1 $env:csprojPath $env:packageName $env:APPVEYOR_REPO_BRANCH
 build:
   verbosity: minimal
 after_build:
