@@ -17,7 +17,7 @@ install:
 - git submodule update --init --recursive
 before_build:
 - nuget restore -verbosity detailed -source "https://www.nuget.org/api/v2" "./src/Autofac.BindingByConvention.sln"
-- ps: C:\projects\autofac-bindingbyconvention\src\Autofac.BindingByConvention\dotnet-versioning-scripts\.NET Versioning\define-version-variables-appveyor.ps1 $env:csprojPath $env:packageName $env:APPVEYOR_REPO_BRANCH
+- ps: C:\projects\autofac-bindingbyconvention\src\Autofac.BindingByConvention\dotnet-versioning-scripts\dotnet-versioning\define-version-variables-appveyor.ps1 $env:csprojPath $env:packageName $env:APPVEYOR_REPO_BRANCH
 build:
   verbosity: minimal
 after_build:
