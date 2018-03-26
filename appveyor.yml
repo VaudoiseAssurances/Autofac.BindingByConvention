@@ -1,5 +1,11 @@
 version: Build-{build}
 image: Visual Studio 2017
+build:
+  verbosity: detailed
+  publish_nuget: true
+  publish_nuget_symbols: true
+  include_nuget_references: true
+  parallel: true
 skip_commits:
   files:
     - docs/*
@@ -10,36 +16,30 @@ branches:
   - master
 environment:
   versioningScriptsFolder: C:\projects\autofac-bindingbyconvention-m58p5\dotnet-versioning-scripts\dotnet-versioning
-  packageVersion: NotSet
   packageName: Autofac.BindingByConvention
   csprojPath: C:\projects\autofac-bindingbyconvention-m58p5\src\Autofac.BindingByConvention\Autofac.BindingByConvention.csproj
   repoNuGet: https://www.nuget.org/api/v2
 install:
 - git submodule update --init --recursive
 before_build:
-- nuget restore -verbosity detailed -source "https://www.nuget.org/api/v2" "./src/Autofac.BindingByConvention.sln"
+- dotnet restore "./src/Autofac.BindingByConvention.sln"
 - ps: C:\projects\autofac-bindingbyconvention-m58p5\dotnet-versioning-scripts\dotnet-versioning\define-version-variables-appveyor.ps1 $env:csprojPath $env:versioningScriptsFolder $env:packageName $env:APPVEYOR_REPO_BRANCH
-build:
-  verbosity: minimal
-after_build:
-- cmd: nuget pack %APPVEYOR_BUILD_FOLDER%\src\Autofac.BindingByConvention\Autofac.BindingByConvention.csproj
-- cmd: nuget pack %APPVEYOR_BUILD_FOLDER%\src\Autofac.BindingByConvention\Autofac.BindingByConvention.csproj -symbols
 artifacts:
-- path: '**/Autofac.BindingByConvention.*.nupkg'
+- path: '**/Autofac.BindingByConvention.*.nupkg '
   name: NuGet_pkg
 deploy:
 - provider: NuGet
   server: https://www.nuget.org/api/v2/package
   artifact: NuGet_pkg
   api_key:
-    secure: xxxxxxxxxxxxxxxxxx
+    secure: oy2lx7vh5ja4te6gtotab3tji3osu5ouzcf6j6bs3uqvqq
   on:
     branch: develop
 - provider: NuGet
   server: https://www.nuget.org/api/v2/package
   artifact: NuGet_pkg
   api_key:
-    secure: 4wZX/xxxxxxxxxxxxxxxxxx
+    secure: oy2lx7vh5ja4te6gtotab3tji3osu5ouzcf6j6bs3uqvqq
   on:
     branch: master
   
