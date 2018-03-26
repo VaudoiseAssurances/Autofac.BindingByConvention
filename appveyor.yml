@@ -10,7 +10,6 @@ branches:
   - master
 environment:
   versioningScriptsFolder: C:\projects\autofac-bindingbyconvention-m58p5\dotnet-versioning-scripts\dotnet-versioning
-  packageVersion: NotSet
   packageName: Autofac.BindingByConvention
   csprojPath: C:\projects\autofac-bindingbyconvention-m58p5\src\Autofac.BindingByConvention\Autofac.BindingByConvention.csproj
   repoNuGet: https://www.nuget.org/api/v2
