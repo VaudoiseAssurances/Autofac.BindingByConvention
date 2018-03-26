@@ -28,14 +28,14 @@ deploy:
   server: https://www.nuget.org/api/v2/package
   artifact: NuGet_pkg
   api_key:
-    secure: xxxxxxxxxxxxxxxxxx
+    secure: oy2lx7vh5ja4te6gtotab3tji3osu5ouzcf6j6bs3uqvqq
   on:
     branch: develop
 - provider: NuGet
   server: https://www.nuget.org/api/v2/package
   artifact: NuGet_pkg
   api_key:
-    secure: 4wZX/xxxxxxxxxxxxxxxxxx
+    secure: oy2lx7vh5ja4te6gtotab3tji3osu5ouzcf6j6bs3uqvqq
   on:
     branch: master
   
