@@ -1,5 +1,5 @@
 version: Build-{build}
-image: Visual Studio 2017
+image: Previous Visual Studio 2017
 skip_commits:
   files:
     - docs/*
