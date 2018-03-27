@@ -11,7 +11,7 @@ branches:
   - develop
   - master
 environment:
-  versioningScriptsFolder: C:\projects\autofac-bindingbyconvention-m58p5\dotnet-versioning-scripts\dotnet-versioning
+  versioningScriptsFolder: .\dotnet-versioning-scripts\dotnet-versioning
   packageName: Autofac.BindingByConvention
   csprojPath: .\src\Autofac.BindingByConvention\Autofac.BindingByConvention.csproj
   repoNuGet: https://www.nuget.org/api/v2
@@ -29,7 +29,7 @@ before_build:
 # after_build:
 # - dotnet pack  $env:csprojPath --configuration Release --include-symbols --output "../../artifacts" --no-build
 artifacts:
-- path: ./artifacts/Autofac.BindingByConvention.*.nupkg
+- path: **/Autofac.BindingByConvention.*.nupkg
   name: NuGet_pkg
 # deploy:
 # - provider: NuGet
