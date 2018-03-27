@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <PackageId>Autofac.BindingByConvention</PackageId>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.1</Version>
+    <owners>salfab</owners>
     <Authors>Vaudoise Assurances</Authors>
     <Company>Vaudoise Assurances</Company>
     <Product>Autofac.BindingByConvention</Product>
@@ -14,8 +15,10 @@
     <PackageTags>Autofac, Binding, Convention</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <AssemblyVersion>0.0.1.0</AssemblyVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyVersion>0.0.2</AssemblyVersion>
+    <VersionPrefix>$(AssemblyVersion)</VersionPrefix>
+    <FileVersion>$(AssemblyVersion)</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

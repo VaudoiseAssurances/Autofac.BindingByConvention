@@ -1,46 +1,52 @@
 version: Build-{build}
 image: Visual Studio 2017
-build:
-  verbosity: normal
-  publish_nuget: true
-  publish_nuget_symbols: true
-  include_nuget_references: true
-  parallel: true
+build_script:
+- cmd: dotnet build %APPVEYOR_BUILD_FOLDER%/src /p:Configuration=%buildConfig%;VersionSuffix=%suffix%
 skip_commits:
   files:
     - docs/*
     - readme.md
+    - appveyor.yml
 branches:
   only:
   - develop
   - master
 environment:
-  versioningScriptsFolder: C:\projects\autofac-bindingbyconvention-m58p5\dotnet-versioning-scripts\dotnet-versioning
+  versioningScriptsFolder: .\dotnet-versioning-scripts\dotnet-versioning
   packageName: Autofac.BindingByConvention
-  csprojPath: C:\projects\autofac-bindingbyconvention-m58p5\src\Autofac.BindingByConvention\Autofac.BindingByConvention.csproj
+  csprojPath: .\src\Autofac.BindingByConvention\Autofac.BindingByConvention.csproj
   repoNuGet: https://www.nuget.org/api/v2
+  repoNuGetPackage: $(repoNuGet)/package
+  buildConfig: Release
 install:
 - git submodule update --init --recursive
 before_build:
 - dotnet restore "./src/Autofac.BindingByConvention.sln"
-- ps: C:\projects\autofac-bindingbyconvention-m58p5\dotnet-versioning-scripts\dotnet-versioning\define-version-variables-appveyor.ps1 $env:csprojPath $env:versioningScriptsFolder $env:packageName $env:APPVEYOR_REPO_BRANCH
+- cmd: powershell %versioningScriptsFolder%/define-version-variables-appveyor.ps1 %csprojPath% %versioningScriptsFolder% %packageName% %APPVEYOR_REPO_BRANCH%
+after_build:
+ - dotnet pack  ./src --configuration %buildConfig% --include-symbols --output "%APPVEYOR_BUILD_FOLDER%/artifacts" --no-build --version-suffix %suffix%
 artifacts:
-- path: '**/Autofac.BindingByConvention.*.nupkg '
+- path: ./artifacts/Autofac.BindingByConvention.*.nupkg
   name: NuGet_pkg
 deploy:
 - provider: NuGet
-  skip_symbols: true
-  server: https://www.nuget.org/api/v2/package
+  server: $(repoNuGetPackage)
   artifact: NuGet_pkg
   api_key:
     secure: uBphca4OZ4WuDCPtfgBWnGvqvQOirDAq+ErQubkiMwUBVnKfETzoMxsNS/ofyTZJ
   on:
     branch: develop
 - provider: NuGet
-  server: https://www.nuget.org/api/v2/package
+  server: $(repoNuGetPackage)
   artifact: NuGet_pkg
   api_key:
     secure: uBphca4OZ4WuDCPtfgBWnGvqvQOirDAq+ErQubkiMwUBVnKfETzoMxsNS/ofyTZJ
   on:
     branch: master
-  
+  # Note on the NuGet deploy provider : 
+  # Nuget takes a few minutes to index the published packages. If two builds are executed in a short time,
+  # the subsequent packages will be built, but the publication to NuGet will fail, and the build will still be green on AppVeyor.
+  # In order to fix this, one option would be to fail the build if a package could not be pushed 
+  # because one already exists with the specified version.
+  # In order to do so, we would need to get rid of the deploy provider, and do it all by hand. It shouldn't be too much work.
+
