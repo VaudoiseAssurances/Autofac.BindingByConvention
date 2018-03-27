@@ -6,6 +6,7 @@ skip_commits:
   files:
     - docs/*
     - readme.md
+    - appveyor.yml
 branches:
   only:
   - develop
