@@ -16,7 +16,7 @@
     <NeutralLanguage>en</NeutralLanguage>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>0.0.1.0</AssemblyVersion>
+    <AssemblyVersion>0.0.2</AssemblyVersion>
     <VersionPrefix>$(AssemblyVersion)</VersionPrefix>
     <FileVersion>$(AssemblyVersion)</FileVersion>
   </PropertyGroup>
