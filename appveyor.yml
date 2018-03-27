@@ -15,6 +15,7 @@ environment:
   packageName: Autofac.BindingByConvention
   csprojPath: .\src\Autofac.BindingByConvention\Autofac.BindingByConvention.csproj
   repoNuGet: https://www.nuget.org/api/v2
+  repoNuGetPackage: $(repoNuGet)/package
   buildConfig: Release
 install:
 - git submodule update --init --recursive
@@ -28,14 +29,14 @@ artifacts:
   name: NuGet_pkg
 deploy:
 - provider: NuGet
-  server: $(repoNuGet)/package
+  server: $(repoNuGetPackage)
   artifact: NuGet_pkg
   api_key:
     secure: uBphca4OZ4WuDCPtfgBWnGvqvQOirDAq+ErQubkiMwUBVnKfETzoMxsNS/ofyTZJ
   on:
     branch: develop
 - provider: NuGet
-  server: $(repoNuGet)/package
+  server: $(repoNuGetPackage)
   artifact: NuGet_pkg
   api_key:
     secure: uBphca4OZ4WuDCPtfgBWnGvqvQOirDAq+ErQubkiMwUBVnKfETzoMxsNS/ofyTZJ
