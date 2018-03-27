@@ -1,11 +1,7 @@
 version: Build-{build}
 image: Visual Studio 2017
-configuration: Release
-build:
-  verbosity: normal
-  publish_nuget: false
-  publish_nuget_symbols: false
-  parallel: true
+build_script:
+- cmd: dotnet build %APPVEYOR_BUILD_FOLDER% /p:Configuration=Release;VersionSuffix=%suffix%
 skip_commits:
   files:
     - docs/*
@@ -30,8 +26,8 @@ before_build:
 - ps: Add-AppveyorMessage "APPVEYOR_PROJECT_SLUG $env:APPVEYOR_PROJECT_SLUG"
 - ps: Add-AppveyorMessage "APPVEYOR_PROJECT_ID $env:APPVEYOR_PROJECT_ID"
 - ps: ./dotnet-versioning-scripts/dotnet-versioning/define-version-variables-appveyor.ps1 $env:csprojPath $env:versioningScriptsFolder $env:packageName $env:APPVEYOR_REPO_BRANCH
-after_build:
-- dotnet pack  $env:csprojPath --configuration Release --include-symbols --output "../../artifacts" --no-build
+# after_build:
+# - dotnet pack  $env:csprojPath --configuration Release --include-symbols --output "../../artifacts" --no-build
 artifacts:
 - path: ./artifacts/Autofac.BindingByConvention.*.nupkg
   name: NuGet_pkg
