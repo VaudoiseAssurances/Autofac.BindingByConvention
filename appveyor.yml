@@ -31,19 +31,19 @@ after_build:
 artifacts:
 - path: ./artifacts/Autofac.BindingByConvention.*.nupkg
   name: NuGet_pkg
-# deploy:
-# - provider: NuGet
-#   server: https://www.nuget.org/api/v2/package
-#   artifact: NuGet_pkg
-#   api_key:
-#     secure: uBphca4OZ4WuDCPtfgBWnGvqvQOirDAq+ErQubkiMwUBVnKfETzoMxsNS/ofyTZJ
-#   on:
-#     branch: develop
-# - provider: NuGet
-#   server: https://www.nuget.org/api/v2/package
-#   artifact: NuGet_pkg
-#   api_key:
-#     secure: uBphca4OZ4WuDCPtfgBWnGvqvQOirDAq+ErQubkiMwUBVnKfETzoMxsNS/ofyTZJ
-#   on:
-#     branch: master
+deploy:
+- provider: NuGet
+  server: https://www.nuget.org/api/v2/package
+  artifact: NuGet_pkg
+  api_key:
+    secure: uBphca4OZ4WuDCPtfgBWnGvqvQOirDAq+ErQubkiMwUBVnKfETzoMxsNS/ofyTZJ
+  on:
+    branch: develop
+- provider: NuGet
+  server: https://www.nuget.org/api/v2/package
+  artifact: NuGet_pkg
+  api_key:
+    secure: uBphca4OZ4WuDCPtfgBWnGvqvQOirDAq+ErQubkiMwUBVnKfETzoMxsNS/ofyTZJ
+  on:
+    branch: master
   
