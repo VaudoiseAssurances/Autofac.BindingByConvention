@@ -5,10 +5,7 @@ Manually registering types in an IoC container can be a tedious task. This exten
 
 ## How to use it
 ### Installation
-Install with NuGet. Package is not published yet. At this time, just reference it the good old ugly way. (sorry!)
-```
-xcopy meh.
-```
+Install with NuGet. See [NuGet package page](https://www.nuget.org/packages/Autofac.BindingByConvention) for more information. 
 
 ## Usage and examples
 
