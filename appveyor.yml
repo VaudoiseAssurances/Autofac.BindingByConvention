@@ -28,7 +28,7 @@ before_build:
 - ps: Add-AppveyorMessage "APPVEYOR_BUILD_FOLDER $env:APPVEYOR_BUILD_FOLDER"
 - ps: Add-AppveyorMessage "APPVEYOR_PROJECT_SLUG $env:APPVEYOR_PROJECT_SLUG"
 - ps: Add-AppveyorMessage "APPVEYOR_PROJECT_ID $env:APPVEYOR_PROJECT_ID"
-- ps: ./dotnet-versioning-scripts\define-version-variables-appveyor.ps1 $env:csprojPath $env:versioningScriptsFolder $env:packageName $env:APPVEYOR_REPO_BRANCH
+- ps: ./dotnet-versioning-scripts\dotnet-versioning/define-version-variables-appveyor.ps1 $env:csprojPath $env:versioningScriptsFolder $env:packageName $env:APPVEYOR_REPO_BRANCH
 after_build:
 - dotnet pack "C:\projects\autofac-bindingbyconvention-m58p5\src\Autofac.BindingByConvention\Autofac.BindingByConvention.csproj" --configuration Debug --include-symbols --output "../../artifacts" --no-build
 artifacts:
