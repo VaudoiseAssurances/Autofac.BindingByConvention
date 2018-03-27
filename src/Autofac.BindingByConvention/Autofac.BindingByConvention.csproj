@@ -15,7 +15,6 @@
     <PackageTags>Autofac, Binding, Convention</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <AssemblyVersion>0.0.1.0</AssemblyVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <AssemblyVersion>0.0.1.0</AssemblyVersion>
     <VersionPrefix>$(AssemblyVersion)</VersionPrefix>
