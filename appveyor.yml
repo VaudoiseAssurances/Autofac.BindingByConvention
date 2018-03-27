@@ -24,8 +24,7 @@ before_build:
 - dotnet restore "./src/Autofac.BindingByConvention.sln"
 - cmd: powershell %versioningScriptsFolder%/define-version-variables-appveyor.ps1 %csprojPath% %versioningScriptsFolder% %packageName% %APPVEYOR_REPO_BRANCH%
 after_build:
- - dotnet pack  ./src --configuration %buildConfig% --include-symbols --output "%APPVEYOR_BUILD_FOLDER%/artifacts" --no-build --version-suffix "%suffix%"
-   on: develop
+- cmd: powershell %versioningScriptsFolder%/dotnet-pack-optionalsuffix.ps1 ./src %buildConfig% "%APPVEYOR_BUILD_FOLDER%/artifacts" %suffix%
 artifacts:
 - path: ./artifacts/Autofac.BindingByConvention.*.nupkg
   name: NuGet_pkg
