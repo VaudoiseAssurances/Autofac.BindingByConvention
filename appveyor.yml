@@ -19,7 +19,7 @@ install:
 - git submodule update --init --recursive
 before_build:
 - dotnet restore "./src/Autofac.BindingByConvention.sln"
-- cmd: %versioningScriptsFolder%/define-version-variables-appveyor.ps1 %csprojPath% %versioningScriptsFolder% %packageName% %APPVEYOR_REPO_BRANCH%
+- cmd: powershell %versioningScriptsFolder%/define-version-variables-appveyor.ps1 %csprojPath% %versioningScriptsFolder% %packageName% %APPVEYOR_REPO_BRANCH%
 after_build:
  - dotnet pack  ./src --configuration Release --include-symbols --output "%APPVEYOR_BUILD_FOLDER%/artifacts" --no-build --version-suffix %suffix%
 artifacts:
