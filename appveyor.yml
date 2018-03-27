@@ -28,14 +28,14 @@ artifacts:
   name: NuGet_pkg
 deploy:
 - provider: NuGet
-  server: $(repoNuGet)
+  server: $(repoNuGet)/package
   artifact: NuGet_pkg
   api_key:
     secure: uBphca4OZ4WuDCPtfgBWnGvqvQOirDAq+ErQubkiMwUBVnKfETzoMxsNS/ofyTZJ
   on:
     branch: develop
 - provider: NuGet
-  server: $(repoNuGet)
+  server: $(repoNuGet)/package
   artifact: NuGet_pkg
   api_key:
     secure: uBphca4OZ4WuDCPtfgBWnGvqvQOirDAq+ErQubkiMwUBVnKfETzoMxsNS/ofyTZJ
