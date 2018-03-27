@@ -1,7 +1,7 @@
 version: Build-{build}
 image: Visual Studio 2017
 build_script:
-- cmd: dotnet build %APPVEYOR_BUILD_FOLDER% /p:Configuration=Release;VersionSuffix=%suffix%
+- ps: dotnet build $env:APPVEYOR_BUILD_FOLDER /p:Configuration=Release;VersionSuffix=$env:suffix
 skip_commits:
   files:
     - docs/*
