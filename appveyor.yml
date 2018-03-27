@@ -1,7 +1,7 @@
 version: Build-{build}
 image: Visual Studio 2017
 build_script:
-- cmd: dotnet build %APPVEYOR_BUILD_FOLDER%/src /p:Configuration=Release;VersionSuffix=%suffix%
+- cmd: dotnet build %APPVEYOR_BUILD_FOLDER%/src /p:Configuration=%buildConfig%;VersionSuffix=%suffix%
 skip_commits:
   files:
     - docs/*
@@ -15,13 +15,14 @@ environment:
   packageName: Autofac.BindingByConvention
   csprojPath: .\src\Autofac.BindingByConvention\Autofac.BindingByConvention.csproj
   repoNuGet: https://www.nuget.org/api/v2
+  buildConfig: Release
 install:
 - git submodule update --init --recursive
 before_build:
 - dotnet restore "./src/Autofac.BindingByConvention.sln"
 - cmd: powershell %versioningScriptsFolder%/define-version-variables-appveyor.ps1 %csprojPath% %versioningScriptsFolder% %packageName% %APPVEYOR_REPO_BRANCH%
 after_build:
- - dotnet pack  ./src --configuration Release --include-symbols --output "%APPVEYOR_BUILD_FOLDER%/artifacts" --no-build --version-suffix %suffix%
+ - dotnet pack  ./src --configuration %buildConfig% --include-symbols --output "%APPVEYOR_BUILD_FOLDER%/artifacts" --no-build --version-suffix %suffix%
 artifacts:
 - path: ./artifacts/Autofac.BindingByConvention.*.nupkg
   name: NuGet_pkg
