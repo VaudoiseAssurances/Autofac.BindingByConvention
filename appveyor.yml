@@ -2,6 +2,9 @@ version: Build-{build}
 image: Visual Studio 2017
 build_script:
 - cmd: dotnet build %APPVEYOR_BUILD_FOLDER%/src /p:Configuration=%buildConfig%;VersionSuffix=%suffix%
+  on: develop
+- cmd: dotnet build %APPVEYOR_BUILD_FOLDER%/src /p:Configuration=%buildConfig%
+  on: master
 skip_commits:
   files:
     - docs/*
