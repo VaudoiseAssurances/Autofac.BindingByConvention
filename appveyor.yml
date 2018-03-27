@@ -1,7 +1,7 @@
 version: Build-{build}
 image: Visual Studio 2017
 build_script:
-- ps: dotnet build  C:\projects\autofac-bindingbyconvention-m58p5 /p:Configuration=Release;VersionSuffix=$env:suffix
+- ps: dotnet build $env:APPVEYOR_BUILD_FOLDER/src /p:Configuration=Release;VersionSuffix=$env:suffix
 skip_commits:
   files:
     - docs/*
