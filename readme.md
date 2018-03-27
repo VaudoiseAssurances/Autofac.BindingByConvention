@@ -1,7 +1,7 @@
 # Autofac.BindingByConvention
 |master branch|develop|NuGet|
 |:---:|:---:|:---:|
-|![master badge state](https://ci.appveyor.com/api/projects/status/github/vaudoiseassurances/autofac.bindingbyconvention?branch=master&svg=true)|![develop badge state](https://ci.appveyor.com/api/projects/status/github/vaudoiseassurances/autofac.bindingbyconvention?branch=develop&svg=true)|[![NuGet version](https://img.shields.io/nuget/v/Autofac.bindingbyconvention.svg)](https://badge.fury.io/nu/Autofac.bindingbyconvention)|
+|![master badge state](https://ci.appveyor.com/api/projects/status/github/vaudoiseassurances/autofac.bindingbyconvention?branch=master&svg=true)|![develop badge state](https://ci.appveyor.com/api/projects/status/github/vaudoiseassurances/autofac.bindingbyconvention?branch=develop&svg=true)|[![NuGet version](https://badge.fury.io/nu/autofac.bindingbyconvention.svg)](https://badge.fury.io/nu/autofac.bindingbyconvention)|
 
 
 Manually registering types in an IoC container can be a tedious task. This extension to Autofac aims to help automatically registering types with common, built-in and extensible conventions.
