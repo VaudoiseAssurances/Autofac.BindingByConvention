@@ -1,5 +1,5 @@
 # Autofac.BindingByConvention
-|master branch|develop|NuGet|
+|master|develop|NuGet|
 |:---:|:---:|:---:|
 |![master badge state](https://ci.appveyor.com/api/projects/status/github/vaudoiseassurances/autofac.bindingbyconvention?branch=master&svg=true)|![develop badge state](https://ci.appveyor.com/api/projects/status/github/vaudoiseassurances/autofac.bindingbyconvention?branch=develop&svg=true)|[![NuGet version](https://badge.fury.io/nu/autofac.bindingbyconvention.svg)](https://badge.fury.io/nu/autofac.bindingbyconvention)|
 
