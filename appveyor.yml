@@ -14,6 +14,7 @@ branches:
   - develop
   - master
 environment:
+  nugetScriptsFolder: .\dotnet-versioning-scripts\NuGet
   versioningScriptsFolder: .\dotnet-versioning-scripts\dotnet-versioning
   packageName: Autofac.BindingByConvention
   csprojPath: .\src\Autofac.BindingByConvention\Autofac.BindingByConvention.csproj
@@ -26,7 +27,7 @@ before_build:
 - dotnet restore "./src/Autofac.BindingByConvention.sln"
 - cmd: powershell %versioningScriptsFolder%/define-version-variables-appveyor.ps1 %csprojPath% %versioningScriptsFolder% %packageName% %APPVEYOR_REPO_BRANCH%
 after_build:
-- cmd: powershell %versioningScriptsFolder%/dotnet-pack-optionalsuffix.ps1 ./src %buildConfig% "%APPVEYOR_BUILD_FOLDER%/artifacts" %suffix%
+- cmd: powershell %nugetScriptsFolder%/dotnet-pack-optionalsuffix.ps1 ./src %buildConfig% "%APPVEYOR_BUILD_FOLDER%/artifacts" %suffix%
 artifacts:
 - path: ./artifacts/Autofac.BindingByConvention.*.nupkg
   name: NuGet_pkg
