@@ -3,4 +3,4 @@
 	url = https://github.com/duvaneljulien/AssemblyInfoVersion.git
 [submodule "dotnet-versioning-scripts"]
 	path = dotnet-versioning-scripts
-	url = https://github.com/VaudoiseAssurances/dotnet-versioning-scripts.git
+	url = https://github.com/VaudoiseAssurances/dotnet-ci-scripts.git
