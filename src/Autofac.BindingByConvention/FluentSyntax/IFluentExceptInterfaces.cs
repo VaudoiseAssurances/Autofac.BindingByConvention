@@ -23,5 +23,8 @@ namespace Autofac.BindingByConvention.FluentSyntax
         /// <typeparam name="TAttribute">The attribute that marks interface types that must be ignored by the described convention. For instance, <see cref="NoBindingByConventionAttribute"/></typeparam>
         /// <returns>The fluent connector for a proper fluent syntax.</returns>
         FluentContractFilter ContractsMarkedWith<TAttribute>() where TAttribute : Attribute;
+
+        FluentContractFilter InheritsFrom<TAncestor>();
+        FluentContractFilter TypesMatching(Func<Type,Type,bool> predicate);
     }
 }
