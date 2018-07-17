@@ -1,8 +1,8 @@
-﻿using Autofac.Builder;
-using Autofac.Features.Scanning;
-
-namespace Autofac.BindingByConvention.FluentSyntax
+﻿namespace Autofac.BindingByConvention.FluentSyntax
 {
+    using Autofac.Builder;
+    using Autofac.Features.Scanning;
+
     /// <summary>
     /// The root connector for the fluent syntax. Allows to select the primary selector for the convention. (based on the contract or based on the implementation).
     /// </summary>
@@ -17,6 +17,13 @@ namespace Autofac.BindingByConvention.FluentSyntax
         public FluentRoot(IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder)
         {
             this.builder = builder;
+        }
+
+        public FluentSelfTypeSelector ToSelf()
+        {
+            var registrationBuilder = this.builder;
+
+            return new FluentSelfTypeSelector(registrationBuilder);
         }
 
         /// <summary>

@@ -1,8 +1,8 @@
-﻿using Autofac.Builder;
-using Autofac.Features.Scanning;
-
-namespace Autofac.BindingByConvention.RegistrationOptions
+﻿namespace Autofac.BindingByConvention.RegistrationOptions
 {
+    using Autofac.Builder;
+    using Autofac.Features.Scanning;
+
     /// <summary>
     /// Defines that the registered types will be instantiated for each resolved dependency.
     /// </summary>
@@ -10,7 +10,8 @@ namespace Autofac.BindingByConvention.RegistrationOptions
     public class PerDependency : RegistrationStrategyBase
     {
         /// <inheritdoc />
-        internal override void Apply(IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder)
+        internal override void Apply(
+            IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder)
         {
             builder.InstancePerDependency();
         }
