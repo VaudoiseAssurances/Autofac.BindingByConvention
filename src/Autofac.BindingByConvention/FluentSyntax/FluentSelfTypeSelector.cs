@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
 
+    using Autofac.BindingByConvention.RegistrationOptions;
     using Autofac.Builder;
     using Autofac.Features.Scanning;
 
@@ -16,26 +17,24 @@
             this.builder = builder;
         }
 
-        public FluentTypeFilter IsAssignableTo<T>()
+        public FluentTypeFilter IfTypeIsAssignableTo<T>()
         {
-            return new FluentTypeFilter(this.builder, new Func<Type, bool>[] { type => type.IsAssignableTo<T>() });
+            return new FluentTypeFilter(this.builder, this,  new Func<Type, bool>[] { type => type.IsAssignableTo<T>() });
         }
 
         public FluentTypeFilter MatchingPredicate(Func<Type, bool> predicate)
         {
-            return new FluentTypeFilter(this.builder, new[] { predicate });
+            return new FluentTypeFilter(this.builder, this,  new[] { predicate });
         }
 
-        public FluentContractFilter NameMatching(Func<string, string, bool> predicate)
+        public void Instanciated<T>()
+            where T : RegistrationStrategyBase, new()
         {
-            this.builder.Where(
-                type => type.GetInterfaces().Any(
-                    i => predicate(i.Name, type.Name)));
+            T instance = Activator.CreateInstance<T>();
 
-            return new FluentContractFilter(
-                this.builder,
-                (Func<Type, Type, bool>)((contract, implementation) =>
-                                                predicate(contract.Name, implementation.Name)));
+            this.builder.AsSelf();
+
+            instance.Apply(this.builder);
         }
     }
 }

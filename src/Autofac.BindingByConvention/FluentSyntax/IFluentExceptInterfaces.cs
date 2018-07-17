@@ -38,5 +38,13 @@
         /// <param name="predicate">The predicate; all classes matching it will be ignored.</param>
         /// <returns>The fluent connector for a proper fluent syntax.</returns>
         FluentContractFilter TypesMatching(Func<Type, Type, bool> predicate);
+
+        /// <summary>
+        /// Checks that all conditionsToFulfill are satisfied.
+        /// </summary>
+        /// <param name="interfaceType">Type of the interface.</param>
+        /// <param name="implementationType">Type of the implementation.</param>
+        /// <returns><c>True</c> if all defined conditionsToFulfill are satisfied; <c>False</c> otherwise.</returns>
+        bool CheckAllFiltersSatisfied(Type interfaceType, Type implementationType);
     }
 }

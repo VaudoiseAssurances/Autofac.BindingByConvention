@@ -34,27 +34,5 @@ namespace Autofac.BindingByConvention.FluentSyntax
         /// The connector for a proper fluent syntax.
         /// </value>
         public IFluentExceptInterfaces Except { get; }
-
-        /// <summary>
-        /// Defines the registration strategy to apply on all types.
-        /// </summary>
-        /// <typeparam name="T">A class that identifies the registration strategy to apply.</typeparam>
-        public void Instanciated<T>()
-            where T : RegistrationStrategyBase, new()
-        {
-            var strategy = new T();
-            this.builder.As(
-                implementationType =>
-                    {
-                        var enumerable = implementationType.GetInterfaces().Where(
-                            interfaceType =>
-                                ((FluentExceptInterfaces)this.Except).CheckAllFiltersSatisfied(
-                                    interfaceType,
-                                    implementationType)).ToArray();
-                        return enumerable;
-                    });
-
-            strategy.Apply(this.builder);
-        }
     }
 }

@@ -4,6 +4,7 @@
     using System.Linq;
 
     using Autofac.BindingByConvention.Conventions;
+    using Autofac.BindingByConvention.RegistrationOptions;
     using Autofac.Builder;
     using Autofac.Features.Scanning;
 
@@ -15,12 +16,13 @@
     {
         private readonly IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder;
 
+        private FluentContractFilter fluentContractFilter;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FluentImplementationTypeSelector"/> class.
         /// </summary>
         /// <param name="builder">The builder.</param>
-        public FluentImplementationTypeSelector(
-            IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder)
+        public FluentImplementationTypeSelector(IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder)
         {
             this.builder = builder;
         }
@@ -36,11 +38,32 @@
             // The Where clause here is not a linq command. it adds a filter in the internal properties of the builder. The execution is not deferred.
             this.builder.Where(type => type.GetInterfaces().Any(i => predicate(i.Name, type.Name)));
 
-            Func<Type, Type, bool> predicateInterfaceIsProperlyNamed =
-                (contract, implementation) => predicate(contract.Name, implementation.Name);
+            Func<Type, Type, bool> predicateInterfaceIsProperlyNamed = (contract, implementation) => predicate(contract.Name, implementation.Name);
 
-            var fluentContractFilter = new FluentContractFilter(this.builder, predicateInterfaceIsProperlyNamed);
-            return fluentContractFilter;
+            this.fluentContractFilter = new FluentContractFilter(this.builder, predicateInterfaceIsProperlyNamed);
+            return this.fluentContractFilter;
+        }
+
+        /// <summary>
+        /// Defines the registration strategy to apply on all types.
+        /// </summary>
+        /// <typeparam name="T">A class that identifies the registration strategy to apply.</typeparam>
+        public void Instanciated<T>()
+            where T : RegistrationStrategyBase, new()
+        {
+            var strategy = new T();
+            this.builder.As(
+                implementationType =>
+                    {
+                        var enumerable = implementationType.GetInterfaces().Where(
+                            interfaceType =>
+                                this.fluentContractFilter.Except.CheckAllFiltersSatisfied(
+                                    interfaceType,
+                                    implementationType)).ToArray();
+                        return enumerable;
+                    });
+
+            strategy.Apply(this.builder);
         }
     }
 }
