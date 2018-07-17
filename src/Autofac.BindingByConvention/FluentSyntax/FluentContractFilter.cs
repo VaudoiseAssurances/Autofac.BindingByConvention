@@ -18,14 +18,19 @@ namespace Autofac.BindingByConvention.FluentSyntax
         /// Initializes a new instance of the <see cref="FluentContractFilter"/> class.
         /// </summary>
         /// <param name="builder">The registration builder.</param>
+        /// <param name="selector"></param>
         /// <param name="predicates">The predicates to apply in any case.</param>
         public FluentContractFilter(
             IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder,
+            FluentImplementationTypeSelector selector,
             params Func<Type, Type, bool>[] predicates)
         {
             this.builder = builder;
             this.Except = new FluentExceptInterfaces(this, predicates);
+            this.AndTypesWillBe = selector;
         }
+
+        public FluentImplementationTypeSelector AndTypesWillBe { get; set; }
 
         /// <summary>
         /// Gets the fluent connector to add exceptions to the interface types being considered for binding by convention.

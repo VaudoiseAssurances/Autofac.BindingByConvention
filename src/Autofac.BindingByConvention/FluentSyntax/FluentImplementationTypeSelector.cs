@@ -40,7 +40,7 @@
 
             Func<Type, Type, bool> predicateInterfaceIsProperlyNamed = (contract, implementation) => predicate(contract.Name, implementation.Name);
 
-            this.fluentContractFilter = new FluentContractFilter(this.builder, predicateInterfaceIsProperlyNamed);
+            this.fluentContractFilter = new FluentContractFilter(this.builder, this, predicateInterfaceIsProperlyNamed);
             return this.fluentContractFilter;
         }
 
