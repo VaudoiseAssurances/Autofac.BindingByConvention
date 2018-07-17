@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-
-using Autofac.BindingByConvention.Conventions;
-using Autofac.Builder;
-using Autofac.Features.Scanning;
-
-namespace Autofac.BindingByConvention.FluentSyntax
+﻿namespace Autofac.BindingByConvention.FluentSyntax
 {
+    using System;
+    using System.Linq;
+
+    using Autofac.BindingByConvention.Conventions;
+    using Autofac.Builder;
+    using Autofac.Features.Scanning;
+
     /// <summary>
     /// A connector for the fluent syntax of type registration by convention.
     /// Selects the interfaces that need to be considered for the type binding, based on some criteria, exposed as methods.
@@ -19,7 +19,8 @@ namespace Autofac.BindingByConvention.FluentSyntax
         /// Initializes a new instance of the <see cref="FluentImplementationTypeSelector"/> class.
         /// </summary>
         /// <param name="builder">The builder.</param>
-        public FluentImplementationTypeSelector(IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder)
+        public FluentImplementationTypeSelector(
+            IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder)
         {
             this.builder = builder;
         }
@@ -33,10 +34,10 @@ namespace Autofac.BindingByConvention.FluentSyntax
         public FluentContractFilter NameMatching(Func<string, string, bool> predicate)
         {
             // The Where clause here is not a linq command. it adds a filter in the internal properties of the builder. The execution is not deferred.
-            this.builder
-                .Where(type => type.GetInterfaces().Any(i => predicate(i.Name, type.Name)));
+            this.builder.Where(type => type.GetInterfaces().Any(i => predicate(i.Name, type.Name)));
 
-            Func<Type, Type, bool> predicateInterfaceIsProperlyNamed = (contract, implementation) => predicate(contract.Name, implementation.Name);
+            Func<Type, Type, bool> predicateInterfaceIsProperlyNamed =
+                (contract, implementation) => predicate(contract.Name, implementation.Name);
 
             var fluentContractFilter = new FluentContractFilter(this.builder, predicateInterfaceIsProperlyNamed);
             return fluentContractFilter;

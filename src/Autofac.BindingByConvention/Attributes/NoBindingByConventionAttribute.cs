@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Autofac.BindingByConvention.Attributes
+﻿namespace Autofac.BindingByConvention.Attributes
 {
+    using System;
+
     /// <inheritdoc />
     /// <summary>
     /// Marks a class as not being subject to being registered in an IoC container by convention.

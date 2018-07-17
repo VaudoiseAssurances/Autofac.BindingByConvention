@@ -1,8 +1,8 @@
-﻿using Autofac.Builder;
-using Autofac.Features.Scanning;
-
-namespace Autofac.BindingByConvention.RegistrationOptions
+﻿namespace Autofac.BindingByConvention.RegistrationOptions
 {
+    using Autofac.Builder;
+    using Autofac.Features.Scanning;
+
     /// <summary>
     /// The base class for all classes that describe a registration strategy, such as "once per dependency", or "singleton"
     /// </summary>
@@ -12,6 +12,7 @@ namespace Autofac.BindingByConvention.RegistrationOptions
         /// Applies the strategy to the specified registration builder.
         /// </summary>
         /// <param name="builder">The registration builder.</param>
-        internal abstract void Apply(IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder);
+        internal abstract void Apply(
+            IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder);
     }
 }

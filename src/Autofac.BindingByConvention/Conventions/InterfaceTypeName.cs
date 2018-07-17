@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Autofac.BindingByConvention.Conventions
+﻿namespace Autofac.BindingByConvention.Conventions
 {
+    using System;
+
     /// <summary>
     /// A class exposing conventions based on the name of the type of an interface.
     /// </summary>

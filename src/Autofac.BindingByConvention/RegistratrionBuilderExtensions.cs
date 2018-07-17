@@ -1,9 +1,9 @@
-﻿using Autofac.BindingByConvention.FluentSyntax;
-using Autofac.Builder;
-using Autofac.Features.Scanning;
-
-namespace Autofac.BindingByConvention
+﻿namespace Autofac.BindingByConvention
 {
+    using Autofac.BindingByConvention.FluentSyntax;
+    using Autofac.Builder;
+    using Autofac.Features.Scanning;
+
     /// <summary>
     /// The entry point for the fluent notation allowing for registration by convention.
     /// </summary>
@@ -14,9 +14,10 @@ namespace Autofac.BindingByConvention
         /// </summary>
         /// <param name="self">The registration builder.</param>
         /// <returns>The fluent connector for a proper fluent syntax.</returns>        
-        public static FluentRoot ByConvention(this IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> self)
+        public static FluentRoot ByConvention(
+            this IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> self)
         {
-            return new FluentRoot(self);            
+            return new FluentRoot(self);
         }
     }
 }
