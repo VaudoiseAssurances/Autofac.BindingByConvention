@@ -7,7 +7,7 @@
     {
         private readonly FluentTypeFilter fluentTypeFilter;
 
-        private List<Func<Type, bool>> conditionsToFulfill;
+        private readonly List<Func<Type, bool>> conditionsToFulfill;
 
         public FluentExceptTypes(FluentTypeFilter fluentTypeFilter, Func<Type, bool>[] predicates)
         {
