@@ -10,7 +10,7 @@
 
     public class FluentTypeFilter
     {
-        private IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder;
+        private readonly IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder;
 
         public FluentTypeFilter(
             IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder,
