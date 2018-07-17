@@ -30,11 +30,7 @@
 
             this.builder.AsSelf();
 
-            // TODO: when moving to Autofac.BindingByConventions : replace with : instance.Apply(this.builder);
-            var method = typeof(T).GetMethods(BindingFlags.Instance | BindingFlags.NonPublic)
-                .Single(o => o.Name == "Apply");
-
-            method.Invoke(instance, new[] { this.builder });
+            instance.Apply(this.builder);            
         }
     }
 }

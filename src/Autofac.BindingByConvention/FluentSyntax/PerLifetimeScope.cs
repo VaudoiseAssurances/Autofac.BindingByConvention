@@ -6,8 +6,7 @@
 
     public class PerLifetimeScope : RegistrationStrategyBase
     {
-        internal override void Apply(
-            IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder)
+        internal override void Apply(IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle> builder)
         {
             builder.InstancePerLifetimeScope();
         }
